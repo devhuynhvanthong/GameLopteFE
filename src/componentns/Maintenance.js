@@ -1,5 +1,4 @@
-
-export default function Maintenance(){
+export default function Maintenance() {
     return <>
         <div>
 
@@ -10,7 +9,7 @@ export default function Maintenance(){
                 position: 'absolute',
                 left: '50%',
                 top: '50%',
-                transform: 'translate(-50%,-50%)'
+                transform: 'translate(-50%,-50%)',
             }} src='maintenance.png'/>
         </div>
     </>
