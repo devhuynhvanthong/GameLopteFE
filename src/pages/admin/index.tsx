@@ -50,7 +50,7 @@ export default function Admin() {
 
         getItem('Cài đặt', '4', <SettingOutlined />),
 
-        getItem('long xuất', '5', <LogoutOutlined />),
+        getItem('Đăng xuất', '5', <LogoutOutlined />),
     ]
     function handleSelectMenu(key: any) {
         switch (key) {

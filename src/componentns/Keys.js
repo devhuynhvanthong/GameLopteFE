@@ -6,7 +6,7 @@ import styles from '~/styles/index.module.css'
 import constants from '~/utils/Constants'
 import { DeleteTwoTone } from '@ant-design/icons'
 export default function Keys(props) {
-    const setPermisiion_ = props.setPermisiion_
+    const setPermission = props.setPermisiion_
     const [input, setInput] = useState('')
     const [data, setData] = useState([])
     const [totalPage, setTotalPage] = useState(1)
@@ -37,7 +37,6 @@ export default function Keys(props) {
                         value: item.code,
                     }]
                 })
-                // @ts-ignore
                 setCategory(arr)
             }
         })
@@ -155,11 +154,11 @@ export default function Keys(props) {
                     setLoading(false)
                 } else {
                     if (response.category === 'authentication') {
-                        setPermisiion_(false)
+                        setPermission(false)
                     }
                 }
             } else {
-                setPermisiion_(false)
+                setPermission(false)
             }
         })
     }
