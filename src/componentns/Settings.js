@@ -10,7 +10,7 @@ import styles from '~/styles/index.module.css'
 import constants from '~/utils/Constants'
 import urls from '~/utils/Urls'
 export default function Settings(props) {
-    const setPermisiion_ = props.setPermisiion_
+    const setPermission = props.setPermisiion_
     const [selectLimitKey, setSelectLimitKey] = useState(undefined)
     const [config, setConfig] = useState([])
     const [checkedMaintenance, setCheckedMaintenance] = useState(false)
@@ -42,10 +42,10 @@ export default function Settings(props) {
                 if (response.status === constants().SUCCESS) {
                     setConfig(response.body)
                 } else {
-                    setPermisiion_(false)
+                    setPermission(false)
                 }
             } else {
-                setPermisiion_(false)
+                setPermission(false)
             }
         })
 
@@ -69,17 +69,17 @@ export default function Settings(props) {
                                 })
                                 setSelectChooseGame(arr)
                             } else {
-                                setPermisiion_(false)
+                                setPermission(false)
                             }
                         } else {
-                            setPermisiion_(false)
+                            setPermission(false)
                         }
                     })
                 } else {
-                    setPermisiion_(false)
+                    setPermission(false)
                 }
             } else {
-                setPermisiion_(false)
+                setPermission(false)
             }
         })
     }, [])
@@ -108,7 +108,7 @@ export default function Settings(props) {
             if (response) {
                 setLoadingMaintenance(false)
             } else {
-                setPermisiion_(false)
+                setPermission(false)
             }
         })
         setLoadingLimitKey(true)
@@ -120,7 +120,7 @@ export default function Settings(props) {
             if (response) {
                 setLoadingLimitKey(false)
             } else {
-                setPermisiion_(false)
+                setPermission(false)
             }
         })
     }
