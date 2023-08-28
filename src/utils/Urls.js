@@ -1,6 +1,7 @@
 export default function Urls() {
     const BASE_URL = 'https://api-dev-gamelopte.aigoox.com/'
-    const BASE_URL_LOGIN = 'https://devaccounts.aigoox.com/login?domain=aHR0cHM6Ly9kZXYtZ2FtZWxvcHRlLmFpZ29veC5jb20vYWRtaW4=&session=expired'
+    const BASE_URL_LOGIN = 'https://devaccounts.aigoox.com/login?domain=aHR0cHM6Ly9nYW1lbG9wdGUuYWlnb294LmNvbS9hZG1pbg==&session=expired'
+    const BASE_LOCAL = 'http://127.0.0.1:8000/'
     const API = BASE_URL + 'api/'
 
     const URL_VERIFY_KEY = API + 'verify_key'

@@ -87,7 +87,7 @@ export default function Home() {
             category: selectCategory,
         }).then(response => {
             if (response.status === constants().SUCCESS) {
-                router.push('https://loptelink.com/st?api=ceca3b7645d9cfe99f8d483dcea35738cb0aa57b&url=https://gamelopte.aigoox.com/get-key?code=' + library().base64Encode(response.body.code) + '&v=' + library().base64Encode(_verify))
+                router.push(' https://lopteapi.com/st?api=9e9e970c7f58835c77eb3bdc6b7eea7495649963&url=https://gamelopte.aigoox.com/get-key?code=' + library().base64Encode(response.body.code) + '&v=' + library().base64Encode(_verify))
                 setText('Receive key successfully')
             } else {
                 setError(response.message)

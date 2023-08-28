@@ -10,7 +10,7 @@ export default function Cookies() {
             expires: 30,
             secure: true,
             sameSite: 'strict',
-            // domain: 'aigoox.com'
+            domain: 'aigoox.com'
         })
     }
 
@@ -20,24 +20,15 @@ export default function Cookies() {
             if (!isParseJson) {
                 return input
             }
-            console.log(JSON.parse(base64Decode(btoa(input))))
-            return JSON.parse(base64Decode(btoa(input)))
+            console.log(JSON.parse(base64Decode(input)))
+            return JSON.parse(base64Decode(input))
         } else {
             return null
         }
     }
 
-    const Remove = (key) => {
-        Cookie.remove(key)
-    }
-
-    const Clear = () => {
-        // Cookie.ge()
-    }
     return {
         Set,
         Get,
-        Remove,
-        Clear,
     }
 }
