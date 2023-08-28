@@ -40,9 +40,11 @@ export default function GetKey() {
     }, [router])
 
     const getKey = async() => {
+        const data = library().base64Decode(router.query.code)
+        const arrayData = data.toString().split('&v=')
         apis().post(urls().URL_GET_KEY, {
-            info: library().base64Decode(router.query.v),
-            code: library().base64Decode(router.query.code),
+            info: arrayData[1],
+            code: arrayData[0],
         }).then(response => {
             if (response.status === constants().SUCCESS) {
                 setKey(response.body.key)

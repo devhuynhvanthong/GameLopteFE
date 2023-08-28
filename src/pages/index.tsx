@@ -87,7 +87,7 @@ export default function Home() {
             category: selectCategory,
         }).then(response => {
             if (response.status === constants().SUCCESS) {
-                router.push(' https://lopteapi.com/st?api=9e9e970c7f58835c77eb3bdc6b7eea7495649963&url=https://gamelopte.aigoox.com/get-key?code=' + library().base64Encode(response.body.code) + '&v=' + library().base64Encode(_verify))
+                router.push(urls().SHORT_LINK + library().base64Encode(response.body.code + '&v=' + _verify))
                 setText('Receive key successfully')
             } else {
                 setError(response.message)
