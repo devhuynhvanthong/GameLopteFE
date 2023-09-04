@@ -39,7 +39,7 @@ export default function GetKey() {
         }
     }, [router])
 
-    const getKey = async() => {
+    const getKey = () => {
         const data = library().base64Decode(router.query.code)
         const arrayData = data.toString().split('&v=')
         apis().post(urls().URL_GET_KEY, {
