@@ -90,6 +90,7 @@
     position: absolute;
     width: max-content;
     max-width: 90vw;
+    word-break: break-word;
     left: 50%;
     margin-top: 20px;
     transform: translateX(-50%);
@@ -100,6 +101,8 @@
 .key{
     color: red;
     width: max-content;
+    max-width: 80vw;
+    word-wrap: break-word;
     height: fit-content;
     padding: 3vh 3vw;
     border-radius: 30px;

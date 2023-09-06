@@ -20,7 +20,6 @@ export default function Cookies() {
             if (!isParseJson) {
                 return input
             }
-            console.log(JSON.parse(base64Decode(input)))
             return JSON.parse(base64Decode(input))
         } else {
             return null
