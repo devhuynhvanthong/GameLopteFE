@@ -12,35 +12,41 @@ export default function GetKey() {
     const router = useRouter()
     const [maintenance, setMaintenance] = useState('')
     useEffect(() => {
-        if (router.isReady) {
-            apis().get(urls().URL_GET_CONFIG).then(response => {
-                if (response) {
-                    response.body.map((item: any) => {
-                        if (item.code === 'maintenance') {
-                            switch (item?.value.toLowerCase()) {
-                            case 'true':
-                                setMaintenance('maintenance')
-                                break
-                            case 'false':
-                                setMaintenance('non-maintenance')
-                                break
-                            default:
-                                setMaintenance('')
-                            }
+        apis().get(urls().URL_GET_CONFIG).then(response => {
+            if (response) {
+                response.body.map((item: any) => {
+                    if (item.code === 'maintenance') {
+                        switch (item?.value.toLowerCase()) {
+                        case 'true':
+                            setMaintenance('maintenance')
+                            break
+                        case 'false':
+                            setMaintenance('non-maintenance')
+                            break
+                        default:
+                            setMaintenance('')
                         }
-                    })
-                }
-            })
-            if (router.query.code) {
-                getKey()
-            } else {
-                setKey('Receiving key failed!')
+                    }
+                })
             }
+        })
+        console.log(router)
+        const pathname = router.asPath
+        const code = pathname.split('code=')
+        if (code.length >= 2) {
+            getKey(code[1])
+        } else {
+            setKey('Receiving key failed!')
         }
-    }, [router])
+    }, [])
 
-    const getKey = () => {
-        const data = library().base64Decode(router.query.code)
+    const getKey = (code: string) => {
+        const data = library().base64Decode(code)
+        console.log(data)
+        if (!data) {
+            setKey('Receiving key failed!')
+            return
+        }
         const arrayData = data.toString().split('&v=')
         apis().post(urls().URL_GET_KEY, {
             info: arrayData[1],

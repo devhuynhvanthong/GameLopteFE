@@ -35,6 +35,14 @@ export default function Settings(props) {
             label: '1 key/ 2 giờ',
             value: 'TWO_KEY_HOUR',
         },
+        {
+            label: '5 key/ 1 giờ',
+            value: 'FIVE_KEY_HOUR',
+        },
+        {
+            label: '5 key/ 1 ngày',
+            value: 'FIVE_KEY_DAY',
+        },
     ]
     useEffect(() => {
         apis().get(urls().URL_GET_CONFIG).then(response => {
