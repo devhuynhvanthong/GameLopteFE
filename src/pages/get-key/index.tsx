@@ -30,7 +30,6 @@ export default function GetKey() {
                 })
             }
         })
-        console.log(router)
         const pathname = router.asPath
         const code = pathname.split('code=')
         if (code.length >= 2) {
@@ -42,7 +41,6 @@ export default function GetKey() {
 
     const getKey = (code: string) => {
         const data = library().base64Decode(code)
-        console.log(data)
         if (!data) {
             setKey('Receiving key failed!')
             return
