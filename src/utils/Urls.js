@@ -1,8 +1,6 @@
 export default function Urls() {
     const BASE_URL = 'https://api-dev-gamelopte.aigoox.com/'
-    const BASE_URL_LOGIN = 'https://devaccounts.aigoox.com/login?domain=aHR0cHM6Ly9nYW1lbG9wdGUuYWlnb294LmNvbS9hZG1pbg==&session=expired'
     const SHORT_LINK = 'https://lopteapi.com/st?api=9e9e970c7f58835c77eb3bdc6b7eea7495649963&url=https://dev-gamelopte.aigoox.com/get-key?code='
-    const BASE_LOCAL = 'http://127.0.0.1:8000/'
     const API = BASE_URL + 'api/'
 
     const URL_VERIFY_KEY = API + 'verify_key'
@@ -18,9 +16,14 @@ export default function Urls() {
     const URL_GET_CONFIG = API + 'get_config'
     const URL_UPDATE_CONFIG = API + 'update_config'
     const URL_GET_CONFIG_VISIT = API + 'get_config_visit'
+    const URL_LOGIN = API + 'login'
+    const URL_ACCOUNT = API + 'account'
+    const URL_REGISTER = API + 'register'
 
     return {
-        BASE_URL_LOGIN,
+        URL_REGISTER,
+        URL_ACCOUNT,
+        URL_LOGIN,
         SHORT_LINK,
         URL_GET_KEY,
         URL_VERIFY_KEY,

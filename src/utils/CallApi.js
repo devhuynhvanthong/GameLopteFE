@@ -9,7 +9,7 @@ export default function CallApi() {
         const cookie = Cookies()
         const constants = Constants()
         if (cookie.Get(constants.KEY_ACCESS_TOKEN, false) != null) {
-            axios.defaults.headers.common.Authorization = `Bearer ${cookie.Get(constants.KEY_ACCESS_TOKEN, true).access_token}`
+            axios.defaults.headers.common.Authorization = `Bearer ${cookie.Get(constants.KEY_ACCESS_TOKEN, true)?.access_token}`
         }
         return axios({
             method: 'POST',
@@ -31,7 +31,7 @@ export default function CallApi() {
         const cookie = Cookies()
         const constants = Constants()
         if (cookie.Get(constants.KEY_ACCESS_TOKEN, false) != null) {
-            axios.defaults.headers.common.Authorization = `Bearer ${cookie.Get(constants.KEY_ACCESS_TOKEN, false).access_token}`
+            axios.defaults.headers.common.Authorization = `Bearer ${cookie.Get(constants.KEY_ACCESS_TOKEN, false)?.access_token}`
         }
         return axios({
             method: 'PUT',
@@ -53,7 +53,7 @@ export default function CallApi() {
         const cookie = Cookies()
         const constants = Constants()
         if (cookie.Get(constants.KEY_ACCESS_TOKEN, false) != null) {
-            axios.defaults.headers.common.Authorization = `Bearer ${cookie.Get(constants.KEY_ACCESS_TOKEN, false).access_token}`
+            axios.defaults.headers.common.Authorization = `Bearer ${cookie.Get(constants.KEY_ACCESS_TOKEN, false)?.access_token}`
         }
         return axios({
             method: 'DELETE',
@@ -75,7 +75,7 @@ export default function CallApi() {
         const cookie = Cookies()
         const constants = Constants()
         if (cookie.Get(constants.KEY_ACCESS_TOKEN, false) != null) {
-            axios.defaults.headers.common.Authorization = `Bearer ${cookie.Get(constants.KEY_ACCESS_TOKEN).access_token}`
+            axios.defaults.headers.common.Authorization = `Bearer ${cookie.Get(constants.KEY_ACCESS_TOKEN)?.access_token}`
         }
         return axios({
             method: 'GET',
@@ -98,7 +98,7 @@ export default function CallApi() {
         const cookie = Cookies()
         const constants = Constants()
         if (cookie.Get(constants.KEY_ACCESS_TOKEN, false) != null) {
-            axios.defaults.headers.common.Authorization = `Bearer ${cookie.Get(constants.KEY_ACCESS_TOKEN, false).access_token}`
+            axios.defaults.headers.common.Authorization = `Bearer ${cookie.Get(constants.KEY_ACCESS_TOKEN, false)?.access_token}`
         }
         const data = new FormData()
         data.append('file', body.originFileObj)
