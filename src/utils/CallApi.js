@@ -3,17 +3,15 @@ import Constants from './Constants'
 import Cookies from './Cookies'
 
 export default function CallApi() {
-    const API_URL = process.env.REACT_APP_API_URL
-
     const post = async(endpoint, body = {}, header_ = '') => {
         const cookie = Cookies()
         const constants = Constants()
         if (cookie.Get(constants.KEY_ACCESS_TOKEN, false) != null) {
-            axios.defaults.headers.common.Authorization = `Bearer ${cookie.Get(constants.KEY_ACCESS_TOKEN, true)?.access_token}`
+            axios.defaults.headers.common.Authorization = `Bearer ${cookie.Get(constants.KEY_ACCESS_TOKEN)?.access_token}`
         }
         return axios({
             method: 'POST',
-            url: `${endpoint}`,
+            url: endpoint,
             data: JSON.stringify(body),
             headers: {
                 'Content-Type': 'application/json',
@@ -31,11 +29,11 @@ export default function CallApi() {
         const cookie = Cookies()
         const constants = Constants()
         if (cookie.Get(constants.KEY_ACCESS_TOKEN, false) != null) {
-            axios.defaults.headers.common.Authorization = `Bearer ${cookie.Get(constants.KEY_ACCESS_TOKEN, false)?.access_token}`
+            axios.defaults.headers.common.Authorization = `Bearer ${cookie.Get(constants.KEY_ACCESS_TOKEN)?.access_token}`
         }
         return axios({
             method: 'PUT',
-            url: `${API_URL}/${endpoint}`,
+            url: endpoint,
             data: body,
             headers: {
                 'Content-Type': 'application/json',
@@ -53,11 +51,11 @@ export default function CallApi() {
         const cookie = Cookies()
         const constants = Constants()
         if (cookie.Get(constants.KEY_ACCESS_TOKEN, false) != null) {
-            axios.defaults.headers.common.Authorization = `Bearer ${cookie.Get(constants.KEY_ACCESS_TOKEN, false)?.access_token}`
+            axios.defaults.headers.common.Authorization = `Bearer ${cookie.Get(constants.KEY_ACCESS_TOKEN)?.access_token}`
         }
         return axios({
             method: 'DELETE',
-            url: `${API_URL}/${endpoint}`,
+            url: endpoint,
             data: body,
             headers: {
                 'Content-Type': 'application/json',
@@ -79,7 +77,7 @@ export default function CallApi() {
         }
         return axios({
             method: 'GET',
-            url: `${endpoint}`,
+            url: endpoint,
             headers: {
                 'Content-Type': 'application/json',
                 ...header_,
@@ -108,7 +106,7 @@ export default function CallApi() {
         try {
             const res = await axios({
                 method: 'POST',
-                url: `${API_URL}/${endpoint}`,
+                url: endpoint,
                 data,
             })
             console.log(res)

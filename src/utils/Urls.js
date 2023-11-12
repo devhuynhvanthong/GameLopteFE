@@ -19,8 +19,10 @@ export default function Urls() {
     const URL_LOGIN = API + 'login'
     const URL_ACCOUNT = API + 'account'
     const URL_REGISTER = API + 'register'
+    const URL_UPDATE_PASSWORD = API + 'update_password'
 
     return {
+        URL_UPDATE_PASSWORD,
         URL_REGISTER,
         URL_ACCOUNT,
         URL_LOGIN,

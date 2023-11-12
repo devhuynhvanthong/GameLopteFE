@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react'
-import { Button, Form, Input, Spin, Table } from 'antd'
+import { Button, Form, Input, Modal, Spin, Table } from 'antd'
 import url from '~/utils/Urls'
 import apis from '~/utils/CallApi'
 import styles from '~/styles/index.module.css'
@@ -10,6 +10,8 @@ export default function Account(props) {
     const [data, setData] = useState([])
     const [isLoading, setLoading] = useState(true)
     const [form] = Form.useForm()
+    const [formUpdate] = Form.useForm()
+    const [update, setUpdate] = useState()
     useEffect(() => {
         loadingData()
     }, [])
@@ -26,6 +28,14 @@ export default function Account(props) {
             dataIndex: 'username',
             key: 'username',
             render: (text) => <a>{text}</a>,
+        },
+        {
+            title: 'Thao tác',
+            render: (value) => <label style={{
+                cursor: 'pointer',
+                color: 'blue',
+                textDecoration: 'underline',
+            }} onClick={() => setUpdate(value) }>{'Cập nhật mật khẩu'}</label>,
         },
     ]
 
@@ -64,6 +74,55 @@ export default function Account(props) {
                 setPermisiion_(false)
             }
         })
+    }
+
+    function handleSubmit(password) {
+        setLoading(true)
+        apis().put(url().URL_UPDATE_PASSWORD, { username: update?.username, password }).then(response => {
+            if (response) {
+                if (response.status === constants().SUCCESS) {
+                    setUpdate(undefined)
+                    setLoading(false)
+                    alert('Cập nhật thành công')
+                } else {
+                    if (response.category === 'authentication') {
+                        setPermisiion_(false)
+                        return
+                    }
+
+                    alert('Cập nhật thất bại')
+                }
+            } else { alert('Cập nhật thất bại') }
+        }).catch(() => {
+            alert('Cập nhật thất bại')
+        })
+    }
+    function RenderUpdateModal() {
+        return <Modal
+            title={`Cập nhật tài khoản - ${update?.username} `}
+            onCancel={() => {
+                setUpdate(undefined)
+                formUpdate.resetFields()
+            }}
+            onOk={() => {
+                formUpdate.submit()
+            }}
+            open={update}>
+            <Form
+                onFinish={({ password }) => handleSubmit(password)}
+                layout={'vertical'}
+                form={formUpdate}>
+                <Form.Item
+                    rules={[{
+                        required: true,
+                        message: <span>{'Mật khẩu là bắt buộc'}</span>,
+                    }]}
+                    name={'password'}
+                    label={'Nhập mật khẩu'}>
+                    <Input type={'password'} placeholder={'Nhập mật khẩu'} />
+                </Form.Item>
+            </Form>
+        </Modal>
     }
 
     return <>
@@ -135,5 +194,7 @@ export default function Account(props) {
                 }
             </div>
         }
+
+        <RenderUpdateModal />
     </>
 }
