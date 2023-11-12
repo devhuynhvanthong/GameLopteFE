@@ -1,6 +1,7 @@
 import Cookie from 'js-cookie'
 import Library from './Library'
 import { base64Decode } from '~/utils/encryption'
+import Constants from '~/utils/Constants'
 
 export default function Cookies() {
     const library = Library()
@@ -10,7 +11,6 @@ export default function Cookies() {
             expires: 30,
             secure: true,
             sameSite: 'strict',
-            domain: 'aigoox.com',
         })
     }
 
@@ -26,8 +26,13 @@ export default function Cookies() {
         }
     }
 
+    const Remove = (key = Constants().KEY_ACCESS_TOKEN) => {
+        Cookie.remove(key)
+    }
+
     return {
         Set,
         Get,
+        Remove,
     }
 }

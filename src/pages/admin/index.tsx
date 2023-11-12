@@ -9,25 +9,21 @@ import Statistics from '~/componentns/Statistics'
 import { useEffect, useState } from 'react'
 import { useRouter } from 'next/router'
 import { AppstoreOutlined, KeyOutlined, LogoutOutlined, OrderedListOutlined, SettingOutlined } from '@ant-design/icons'
+import Login from '~/componentns/Login'
+import Account from '~/componentns/Account'
+import Cookies from '~/utils/Cookies'
+import constants from '~/utils/Constants'
 export default function Admin() {
     const router = useRouter()
     const library = Library()
-    const urls = Urls()
-    const [isMobile, setMobile] = useState(false)
+    const cookie = Cookies()
     const [selectMenu, setSelectMenu] = useState('1')
     const [title, setTitle] = useState('Keys')
     const [isShowModel, setShowModel] = useState(false)
     const [permission_, setPermission_] = useState(true)
     useEffect(() => {
-        if (!library.checkLogin()) {
-            router.push(urls.BASE_URL_LOGIN)
-        }
-
         if (library.isMobile()) {
-            alert('Trang điều khiển không hỗ trợ phiên bản mobile!')
-            setMobile(true)
-        } else {
-            setMobile(false)
+            router.push('not-support-mobile')
         }
     }, [])
     function getItem(label: string, key: string, icon: any, children: any = undefined, type: any = undefined) {
@@ -50,7 +46,9 @@ export default function Admin() {
 
         getItem('Cài đặt', '4', <SettingOutlined />),
 
-        getItem('Đăng xuất', '5', <LogoutOutlined />),
+        getItem('Tài khoản', '5', <SettingOutlined />),
+
+        getItem('Đăng xuất', '6', <LogoutOutlined />),
     ]
     function handleSelectMenu(key: any) {
         switch (key) {
@@ -71,21 +69,20 @@ export default function Admin() {
             setTitle('Cài đặt')
             break
         case '5':
+            setSelectMenu(key)
+            setTitle('Tài khoản')
+            break
+        case '6':
             setShowModel(true)
             break
         }
-    }
-    function handleClickLogin() {
-        setTimeout(function() {
-            router.push(urls.BASE_URL_LOGIN)
-        }, 300)
     }
 
     return <>
         <div className={styles.wapper}>
             <div className={styles.wapperAdmin}>
                 {
-                    !isMobile && permission_ &&
+                    typeof window && permission_ &&
                     <>
                         <div
                             style={{
@@ -133,31 +130,16 @@ export default function Admin() {
                                 selectMenu === '4' &&
                                 <Settings setPermisiion_={setPermission_}/>
                             }
+                            {
+                                selectMenu === '5' &&
+                                <Account setPermisiion_={setPermission_}/>
+                            }
                         </div>
                     </>
                 }
                 {
                     !permission_ &&
-                    <div>
-                        <img
-                            style={{
-                                height: '60vh',
-                                position: 'absolute',
-                                left: '50%',
-                                top: '30%',
-                                transform: 'translate(-50%,-40%)',
-                                border: '2px solid #B21065',
-                                borderRadius: 30,
-                            }}
-                            src='/permission.jpg' alt={'Accept Permission'}/>
-                        <div >
-                            <button
-                                onClick={() => handleClickLogin()}
-                                className={styles.btnLogin}>
-                                Đăng nhập
-                            </button>
-                        </div>
-                    </div>
+                    <Login />
                 }
 
                 <Modal
@@ -165,7 +147,8 @@ export default function Admin() {
                     centered
                     open={isShowModel}
                     onOk={() => {
-                        router.push(urls.BASE_URL_LOGIN)
+                        cookie.Set(constants().KEY_ACCESS_TOKEN, null)
+                        router.reload()
                     }}
                     onCancel={() => setShowModel(false)}
                 >
