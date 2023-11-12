@@ -1,6 +1,6 @@
 export default function Urls() {
     const BASE_URL = 'https://api-gamelopte.aigoox.com/'
-    const SHORT_LINK = `https://lopteapi.com/st?api=9e9e970c7f58835c77eb3bdc6b7eea7495649963&url=${window.location.host}/get-key?code=`
+    const SHORT_LINK = `https://lopteapi.com/st?api=9e9e970c7f58835c77eb3bdc6b7eea7495649963&url=${window.location.origin}/get-key?code=`
     const API = BASE_URL + 'api/'
 
     const URL_VERIFY_KEY = API + 'verify_key'
